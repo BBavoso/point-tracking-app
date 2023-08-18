@@ -1,14 +1,6 @@
 import React from "react";
 import "./App.css";
-
-function PointBox() {
-  return (
-    <div className="pointBox">
-      <div className="pointBox-checkBox"></div>
-      <h1>points: </h1>
-    </div>
-  );
-}
+import pointsData from "./points.json";
 
 class App extends React.Component {
   constructor() {
@@ -17,6 +9,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(pointsData);
     return (
       <div className="App">
         <h1>
@@ -24,9 +17,30 @@ class App extends React.Component {
           pretty cool
         </h1>
         <PointBox points={2} />
+        {/* <Test /> */}
       </div>
     );
   }
+}
+
+function PointBox(props) {
+  return (
+    <div className="pointBox">
+      <div className="pointBox-checkBox">
+        <input type="checkbox" />
+      </div>
+      <h1>points: {props.points}</h1>
+    </div>
+  );
+}
+
+function Test() {
+  return (
+    <div>
+      test object <br />
+      {JSON.parse(pointsData)}
+    </div>
+  );
 }
 
 export default App;
