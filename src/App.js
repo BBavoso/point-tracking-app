@@ -12,33 +12,37 @@ class App extends React.Component {
     console.log(pointsData);
     return (
       <div className="App">
-        <h1>
-          hello! <br />
-          pretty cool
-        </h1>
-        <PointBox points={2} />
-        {/* <Test /> */}
+        <ObjectivesDisplay />
       </div>
     );
   }
 }
 
 function PointBox(props) {
+  const text = props.text;
+  const points = props.points;
   return (
     <div className="pointBox">
-      <div className="pointBox-checkBox">
-        <input type="checkbox" />
-      </div>
-      <h1>points: {props.points}</h1>
+      <input type="checkbox" />
+      <p>the text is: {text}</p>
+      <p>the points are: {points}</p>
     </div>
   );
 }
 
-function Test() {
+function ObjectivesDisplay() {
+  const objectives = pointsData.objectives;
   return (
     <div>
-      test object <br />
-      {JSON.parse(pointsData)}
+      <ul>
+        {objectives.map((i) => {
+          return (
+            <li>
+              <PointBox text={i.text} points={i.points} />
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
