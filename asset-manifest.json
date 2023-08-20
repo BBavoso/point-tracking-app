@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/point-tracking-app/static/css/main.db757fb3.css",
-    "main.js": "/point-tracking-app/static/js/main.94819448.js",
+    "main.js": "/point-tracking-app/static/js/main.c3099569.js",
     "static/js/787.01c3141b.chunk.js": "/point-tracking-app/static/js/787.01c3141b.chunk.js",
     "index.html": "/point-tracking-app/index.html",
     "main.db757fb3.css.map": "/point-tracking-app/static/css/main.db757fb3.css.map",
-    "main.94819448.js.map": "/point-tracking-app/static/js/main.94819448.js.map",
+    "main.c3099569.js.map": "/point-tracking-app/static/js/main.c3099569.js.map",
     "787.01c3141b.chunk.js.map": "/point-tracking-app/static/js/787.01c3141b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.db757fb3.css",
-    "static/js/main.94819448.js"
+    "static/js/main.c3099569.js"
   ]
 }
