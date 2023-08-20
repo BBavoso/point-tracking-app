@@ -1,6 +1,7 @@
 {
   "objectives": [
     { "text": "test text", "points": 3 },
-    { "text": "text 2", "points": 5 }
+    { "text": "text 2", "points": 5 },
+    { "text": "nice person", "points": 10 }
   ]
 }
