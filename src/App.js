@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "./App.scss";
 import pointsData from "./points.json";
 
 class App extends React.Component {
@@ -22,10 +22,16 @@ function PointBox(props) {
   const text = props.text;
   const points = props.points;
   return (
-    <div className="pointBox">
-      <input type="checkbox" />
-      <p>the text is: {text}</p>
-      <p>the points are: {points}</p>
+    <div className="pointbox">
+      <div className="pointbox-checkbox pointbox-item">
+        <input type="checkbox" />
+      </div>
+      <div className="pointbox-text pointbox-item">
+        <p>the text is: {text}</p>
+      </div>
+      <div className="pointbox-points pointbox-item">
+        <p>the points are: {points}</p>
+      </div>
     </div>
   );
 }
@@ -33,17 +39,15 @@ function PointBox(props) {
 function ObjectivesDisplay() {
   const objectives = pointsData.objectives;
   return (
-    <div>
-      <ul>
-        {objectives.map((i) => {
-          return (
-            <li>
-              <PointBox text={i.text} points={i.points} />
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+    <ul className="objectivesDisplay">
+      {objectives.map((i) => {
+        return (
+          <li>
+            <PointBox text={i.text} points={i.points} />
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 
