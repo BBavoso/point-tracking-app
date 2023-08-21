@@ -1,0 +1,26 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.pointbox {
+  border: 1px dashed black;
+  margin-bottom: 25px;
+  padding: 10px;
+  display: flex;
+  justify-content: left;
+}
+
+.pointbox-item {
+  border: 1px solid black;
+  display: inline-block;
+  // position: absolute;
+}
+
+.objectivesDisplay {
+  padding: 10px;
+}
+
+li {
+  list-style-type: none;
+}
