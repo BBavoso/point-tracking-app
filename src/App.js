@@ -188,7 +188,7 @@ function Share(props) {
   const handleClick = () => {
     const params = props.getURLParams();
     setLink(params.toString());
-    setUrl("http://bbavoso.github.io//?objectives=" + params);
+    setUrl("http://bbavoso.github.io/?objectives=" + params);
   };
 
   return (
