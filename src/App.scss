@@ -14,6 +14,10 @@ table {
   width: 100%;
 }
 
+button {
+  cursor: pointer;
+}
+
 td {
   padding: 10px;
 }
@@ -33,6 +37,10 @@ th {
 
 .checkbox-filled:hover {
   cursor: pointer;
+}
+
+#objective-header {
+  // border: 1px solid black;
 }
 
 $points-padding: 10vw;
@@ -60,3 +68,5 @@ td:first-child {
 #totalPointsText {
   text-align: right;
 }
+
+// *** background color section ***
