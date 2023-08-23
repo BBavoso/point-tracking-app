@@ -85,6 +85,11 @@ function ObjectivesDisplay() {
               />
             );
           })}
+          <tr>
+            <td colSpan={2} className="newObjectiveTd">
+              <AddRowForm addObjectiveFunction={addObjective} />
+            </td>
+          </tr>
         </tbody>
         <tfoot>
           <tr>
@@ -97,7 +102,7 @@ function ObjectivesDisplay() {
           </tr>
         </tfoot>
       </table>
-      <AddRowForm addObjectiveFunction={addObjective} />
+
       <Share getURLParams={getURLParams} getSentParams={getSentParams} />
     </div>
   );
@@ -139,6 +144,7 @@ function AddRowForm(props) {
     e.preventDefault();
     props.addObjectiveFunction(objectiveText, pointsText);
     resetText();
+    document.getElementById("newObjectiveInput").focus();
   };
 
   const resetText = () => {
@@ -147,22 +153,28 @@ function AddRowForm(props) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="new objective"
-        value={objectiveText}
-        onChange={(e) => setObjectiveText(e.target.value)}
-        required
-      />
-      <input
-        type="number"
-        placeholder="amount of points"
-        value={pointsText}
-        onChange={(e) => setPointsText(e.target.value)}
-        required
-      />
-      <button>add row</button>
+    <form onSubmit={handleSubmit} className="newRowForm">
+      <div className="row">
+        <input
+          type="text"
+          placeholder="new objective"
+          value={objectiveText}
+          onChange={(e) => setObjectiveText(e.target.value)}
+          required
+          id="newObjectiveInput"
+          className="col-6 newRowText"
+        />
+
+        <input
+          type="number"
+          placeholder="amount of points"
+          value={pointsText}
+          onChange={(e) => setPointsText(e.target.value)}
+          required
+          className="col-4 newRowText"
+        />
+        <button className="btn btn-secondary col-2">add row</button>
+      </div>
     </form>
   );
 }
