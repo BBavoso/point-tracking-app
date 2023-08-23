@@ -1,4 +1,5 @@
 import React from "react";
+// import "bootstrap/dist/css/bootstrap.css";
 import "./App.scss";
 // import pointsData from "./points.json";
 import { useState } from "react";
@@ -65,8 +66,12 @@ function ObjectivesDisplay() {
       <table className="objectivesDisplay">
         <thead>
           <tr>
-            <th id="objective-header">Objective</th>
-            <th id="points-header">Points</th>
+            <th id="objective-header" className="col-8">
+              Objective
+            </th>
+            <th id="points-header" className="col-4">
+              Points
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -193,7 +198,9 @@ function Share(props) {
 
   return (
     <div id="share">
-      <button onClick={handleClick}>Share</button>
+      <button onClick={handleClick} type="button" className="btn btn-primary">
+        Share
+      </button>
       {link ? (
         <button onClick={() => navigator.clipboard.writeText(url)}>
           Copy to Clipboard
