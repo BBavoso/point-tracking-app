@@ -62,17 +62,11 @@ function CheckBox(props) {
     }
   };
 
-  const test = false;
-
   return (
     <div
       className="checkbox-filled"
       onClick={props.handleClick}
-      style={
-        test
-          ? { backgroundColor: "rgba(109, 234, 255, .75)" }
-          : { backgroundColor: getBackgroundColor() }
-      }
+      style={{ backgroundColor: getBackgroundColor() }}
       onChange={props.onChange}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
