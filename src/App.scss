@@ -70,3 +70,19 @@ td:first-child {
 }
 
 // *** background color section ***
+
+.checkbox-filled.checked {
+  background-color: #5fff7fbc;
+}
+
+.checkbox-filled.checked:hover {
+  background-color: #5fff7f;
+}
+
+.checkbox-filled.unchecked {
+  background-color: #90c6c0d1;
+}
+
+.checkbox-filled.unchecked:hover {
+  background-color: #90c6c0;
+}

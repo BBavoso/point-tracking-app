@@ -106,40 +106,21 @@ function ObjectivesDisplay() {
 
 function CheckableRow(props) {
   const checked = props.isChecked;
-  const [isHovered, setHovered] = useState(false);
   const text = props.text;
   const points = props.points;
 
-  const onMouseEnter = () => {
-    setHovered(true);
-  };
-
-  const onMouseLeave = () => {
-    setHovered(false);
-  };
-
   const getBackgroundColor = () => {
-    if (checked) {
-      if (isHovered) {
-        return "rgba(0, 206, 65, 1)";
-      }
-      return "rgba(0, 206, 65, .75)";
-    } else {
-      if (isHovered) {
-        return "rgba(109, 234, 255, 1)";
-      }
-      return "rgba(109, 234, 255, .75)";
-    }
+    return checked ? "checked" : "unchecked";
   };
+
+  const className = "checkbox-filled " + getBackgroundColor();
 
   return (
     <tr
-      className="checkbox-filled"
+      className={className}
       onClick={props.handleClick}
-      style={{ backgroundColor: getBackgroundColor() }}
+      // style={{ backgroundColor: getBackgroundColor() }}
       onChange={props.onChange}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
     >
       <td className="pointbox-text pointbox-item">
         <p>{text}</p>
