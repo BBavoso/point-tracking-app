@@ -1,5 +1,4 @@
 import React from "react";
-// import "bootstrap/dist/css/bootstrap.css";
 import "./App.scss";
 // import pointsData from "./points.json";
 import { useState } from "react";
