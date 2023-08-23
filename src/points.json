@@ -3,6 +3,10 @@
     { "text": "sample text 1", "points": "10" },
     { "text": "sample text 2", "points": "15" },
     { "text": "very epic text number three", "points": "5" },
-    { "text": "test text", "points": "3" }
+    { "text": "test text", "points": "3" },
+    {
+      "text": "very long text very long text very long text very long text very long text very long text very long text very long text very long text very long text very long text",
+      "points": "11"
+    }
   ]
 }

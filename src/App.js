@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.scss";
-import pointsData from "./points.json";
+// import pointsData from "./points.json";
 import { useState } from "react";
 
 class App extends React.Component {
@@ -18,27 +18,93 @@ class App extends React.Component {
   }
 }
 
-function PointBox(props) {
-  const text = props.text;
-  const points = props.points;
+function ObjectivesDisplay() {
+  const getSentParams = () => {
+    const params = new URLSearchParams(window.location.search);
+    const base64 = params.get("objectives");
+    const startingObjectives = JSON.parse(atob(base64));
+    return startingObjectives["objectives"];
+  };
+
+  const [objectives, setObjectives] = useState(getSentParams());
+  const [checkedState, setCheckedState] = useState(
+    new Array(objectives.length).fill(false)
+  );
+
+  const handleOnChenge = (position) => {
+    const updatedCheckedState = checkedState.map((item, index) => {
+      return index === position ? !item : item;
+    });
+
+    setCheckedState(updatedCheckedState);
+  };
+
+  const getURLParams = () => {
+    const jsonString = JSON.stringify({ objectives });
+    const base64 = btoa(jsonString);
+    return base64;
+  };
+
+  const findTotal = () => {
+    return objectives.reduce((acc, cur, index) => {
+      if (checkedState[index]) {
+        return acc + Number(cur.points);
+      }
+      return acc;
+    }, 0);
+  };
+
+  const addObjective = (text, points) => {
+    setObjectives([...objectives, { text, points }]);
+
+    const updatedCheckedState = [...checkedState, false];
+    setCheckedState(updatedCheckedState);
+  };
+
   return (
-    <tr className="pointbox">
-      <td className="pointbox-checkbox pointbox-item">
-        <CheckBox handleClick={props.handleClick} isChecked={props.isChecked} />
-      </td>
-      <td className="pointbox-text pointbox-item">
-        <p>{text}</p>
-      </td>
-      <td className="pointbox-points pointbox-item">
-        <p>{points}</p>
-      </td>
-    </tr>
+    <div id="tableDiv">
+      <table className="objectivesDisplay">
+        <thead>
+          <tr>
+            <th id="objective-header">Objective</th>
+            <th id="points-header">Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          {objectives.map((i, index) => {
+            return (
+              <CheckableRow
+                text={i.text}
+                points={i.points}
+                isChecked={checkedState[index]}
+                handleClick={() => handleOnChenge(index)}
+                key={index}
+              />
+            );
+          })}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td id="totalPointsText">
+              <p>total points:</p>
+            </td>
+            <td>
+              <p id="pointsTotal">{findTotal()}</p>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+      <AddRowForm addObjectiveFunction={addObjective} />
+      <Share getURLParams={getURLParams} />
+    </div>
   );
 }
 
-function CheckBox(props) {
+function CheckableRow(props) {
   const checked = props.isChecked;
   const [isHovered, setHovered] = useState(false);
+  const text = props.text;
+  const points = props.points;
 
   const onMouseEnter = () => {
     setHovered(true);
@@ -63,68 +129,72 @@ function CheckBox(props) {
   };
 
   return (
-    <div
+    <tr
       className="checkbox-filled"
       onClick={props.handleClick}
       style={{ backgroundColor: getBackgroundColor() }}
       onChange={props.onChange}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-    ></div>
+    >
+      <td className="pointbox-text pointbox-item">
+        <p>{text}</p>
+      </td>
+      <td className="pointbox-points pointbox-item">
+        <p>{points}</p>
+      </td>
+    </tr>
   );
 }
 
-function ObjectivesDisplay() {
-  const objectives = pointsData.objectives;
-  const [checkedState, setCheckedState] = useState(
-    new Array(objectives.length).fill(false)
-  );
+function AddRowForm(props) {
+  const [objectiveText, setObjectiveText] = useState("");
+  const [pointsText, setPointsText] = useState("");
 
-  const handleOnChenge = (position) => {
-    const updatedCheckedState = checkedState.map((item, index) => {
-      return index === position ? !item : item;
-    });
-
-    setCheckedState(updatedCheckedState);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.addObjectiveFunction(objectiveText, pointsText);
+    resetText();
   };
 
-  const findTotal = () => {
-    return objectives.reduce((acc, cur, index) => {
-      if (checkedState[index]) {
-        return acc + Number(cur.points);
-      }
-      return acc;
-    }, 0);
+  const resetText = () => {
+    setObjectiveText("");
+    setPointsText("");
   };
 
   return (
-    <div id="tableDiv">
-      <table className="objectivesDisplay">
-        <tr>
-          <th>Finished</th>
-          <th>Objective</th>
-          <th>Points</th>
-        </tr>
-        {objectives.map((i, index) => {
-          return (
-            <PointBox
-              text={i.text}
-              points={i.points}
-              isChecked={checkedState[index]}
-              handleClick={() => handleOnChenge(index)}
-            />
-          );
-        })}
-        <tr>
-          <td />
-          <td id="totalPointsText">
-            <p>total points:</p>
-          </td>
-          <td>
-            <p id="pointsTotal">{findTotal()}</p>
-          </td>
-        </tr>
-      </table>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="new objective"
+        value={objectiveText}
+        onChange={(e) => setObjectiveText(e.target.value)}
+        required
+      />
+      <input
+        type="number"
+        placeholder="amount of points"
+        value={pointsText}
+        onChange={(e) => setPointsText(e.target.value)}
+        required
+      />
+      <button>add row</button>
+    </form>
+  );
+}
+
+function Share(props) {
+  const [link, setLink] = useState("");
+
+  const handleClick = () => {
+    const params = props.getURLParams();
+    setLink(params.toString());
+  };
+
+  return (
+    <div id="share">
+      <button onClick={handleClick}>Share</button>
+      <p>{link}</p>
     </div>
   );
 }

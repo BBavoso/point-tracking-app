@@ -3,10 +3,15 @@
   margin: 0;
 }
 
-.objectivesDisplay {
+body {
+  background-color: gray;
+}
+
+table {
   border-collapse: collapse;
   text-align: center;
   font-size: xx-large;
+  width: 100%;
 }
 
 td {
@@ -22,23 +27,29 @@ th {
 }
 
 .checkbox-filled {
-  min-height: 100px;
-  height: 100%;
-  min-width: 100%;
+  width: 100%;
   position: relative;
-  // background-color: aquamarine;
 }
 
 .checkbox-filled:hover {
-  background-color: blue;
   cursor: pointer;
 }
 
-tr:first-child {
+$points-padding: 10vw;
+#points-header {
+  padding-left: $points-padding;
+  padding-right: $points-padding;
+}
+
+thead {
   border-bottom: 1px solid black;
 }
 
-td:nth-child(2) {
+tfoot {
+  border-top: 1px solid black;
+}
+
+td:first-child {
   text-align: left;
 }
 
@@ -48,8 +59,4 @@ td:nth-child(2) {
 
 #totalPointsText {
   text-align: right;
-}
-
-li {
-  list-style-type: none;
 }
