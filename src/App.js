@@ -123,7 +123,6 @@ function CheckableRow(props) {
     <tr
       className={className}
       onClick={props.handleClick}
-      // style={{ backgroundColor: getBackgroundColor() }}
       onChange={props.onChange}
     >
       <td className="pointbox-text pointbox-item">
@@ -153,28 +152,33 @@ function AddRowForm(props) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="newRowForm">
-      <div className="row">
-        <input
-          type="text"
-          placeholder="new objective"
-          value={objectiveText}
-          onChange={(e) => setObjectiveText(e.target.value)}
-          required
-          id="newObjectiveInput"
-          className="col-6 newRowText"
-        />
+    <form onSubmit={handleSubmit} className="newRowForm row">
+      <input
+        type="text"
+        placeholder="new objective"
+        value={objectiveText}
+        onChange={(e) => setObjectiveText(e.target.value)}
+        required
+        id="newObjectiveInput"
+        className="col-6 newRowText addNewRowElement"
+      />
 
-        <input
-          type="number"
-          placeholder="amount of points"
-          value={pointsText}
-          onChange={(e) => setPointsText(e.target.value)}
-          required
-          className="col-4 newRowText"
-        />
-        <button className="btn btn-secondary col-2">add row</button>
-      </div>
+      <input
+        type="number"
+        placeholder="amount of points"
+        value={pointsText}
+        onChange={(e) => setPointsText(e.target.value)}
+        required
+        className="col-4 newRowText addNewRowElement"
+        id="newPointsInput"
+      />
+      <button
+        className="col-2 newRowButton btn btn-secondary"
+        onSubmit={handleSubmit}
+        type="submit"
+      >
+        Add New Row
+      </button>
     </form>
   );
 }

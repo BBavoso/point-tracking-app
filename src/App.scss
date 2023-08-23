@@ -1,6 +1,7 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 // *** bootstrap import ***
@@ -68,9 +69,14 @@ td:first-child {
   text-align: right;
 }
 
-// .newRowForm {
-//   min-height: 100%;
-// }
+.newRowForm {
+  margin: 0;
+}
+
+.newRowButton {
+  padding: 0;
+  border-radius: 0;
+}
 
 .newObjectiveTd {
   padding: 0;
