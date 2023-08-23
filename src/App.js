@@ -198,7 +198,10 @@ function Share(props) {
         Share
       </button>
       {link ? (
-        <button onClick={() => navigator.clipboard.writeText(url)}>
+        <button
+          onClick={() => navigator.clipboard.writeText(url)}
+          className="btn btn-secondary"
+        >
           Copy to Clipboard
         </button>
       ) : (
@@ -206,7 +209,10 @@ function Share(props) {
       )}
       {link ? (
         <p>
-          Link To This Objective Tracker: <a href={url}>{url}</a>
+          Link To This Objective Tracker:{" "}
+          <a href={url}>
+            {url.length > 100 ? url.substring(0, 50) + "..." : url}
+          </a>
         </p>
       ) : (
         ""
