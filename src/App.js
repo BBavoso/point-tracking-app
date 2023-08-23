@@ -4,11 +4,6 @@ import "./App.scss";
 import { useState } from "react";
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
   render() {
     return (
       <div className="App">
@@ -21,6 +16,10 @@ class App extends React.Component {
 function ObjectivesDisplay() {
   const getSentParams = () => {
     const params = new URLSearchParams(window.location.search);
+    console.log(params);
+    if (params.size === 0) {
+      return [];
+    }
     const base64 = params.get("objectives");
     const startingObjectives = JSON.parse(atob(base64));
     return startingObjectives["objectives"];
@@ -95,7 +94,7 @@ function ObjectivesDisplay() {
         </tfoot>
       </table>
       <AddRowForm addObjectiveFunction={addObjective} />
-      <Share getURLParams={getURLParams} />
+      <Share getURLParams={getURLParams} getSentParams={getSentParams} />
     </div>
   );
 }
@@ -185,16 +184,30 @@ function AddRowForm(props) {
 
 function Share(props) {
   const [link, setLink] = useState("");
-
+  const [url, setUrl] = useState("");
   const handleClick = () => {
     const params = props.getURLParams();
     setLink(params.toString());
+    setUrl("http://bbavoso.github.io//?objectives=" + params);
   };
 
   return (
     <div id="share">
       <button onClick={handleClick}>Share</button>
-      <p>{link}</p>
+      {link ? (
+        <button onClick={() => navigator.clipboard.writeText(url)}>
+          Copy to Clipboard
+        </button>
+      ) : (
+        ""
+      )}
+      {link ? (
+        <p>
+          Link To This Objective Tracker: <a href={url}>{url}</a>
+        </p>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
