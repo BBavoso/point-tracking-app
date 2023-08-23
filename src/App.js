@@ -16,7 +16,6 @@ class App extends React.Component {
 function ObjectivesDisplay() {
   const getSentParams = () => {
     const params = new URLSearchParams(window.location.search);
-    console.log(params);
     if (params.size === 0) {
       return [];
     }
@@ -189,6 +188,10 @@ function Share(props) {
   const handleClick = () => {
     const params = props.getURLParams();
     setLink(params.toString());
+    if (params === "eyJvYmplY3RpdmVzIjpbXX0=") {
+      setUrl("http://bbavoso.github.io/point-tracking-app/");
+      return;
+    }
     setUrl("http://bbavoso.github.io/point-tracking-app/?objectives=" + params);
   };
 
