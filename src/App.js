@@ -22,21 +22,61 @@ function PointBox(props) {
   const text = props.text;
   const points = props.points;
   return (
-    <div className="pointbox">
-      <div className="pointbox-checkbox pointbox-item">
-        <input
-          type="checkbox"
-          checked={props.isChecked}
-          onChange={props.onChange}
-        />
-      </div>
-      <div className="pointbox-text pointbox-item">
-        <p>the text is: {text}</p>
-      </div>
-      <div className="pointbox-points pointbox-item">
-        <p>the points are: {points}</p>
-      </div>
-    </div>
+    <tr className="pointbox">
+      <td className="pointbox-checkbox pointbox-item">
+        <CheckBox handleClick={props.handleClick} isChecked={props.isChecked} />
+      </td>
+      <td className="pointbox-text pointbox-item">
+        <p>{text}</p>
+      </td>
+      <td className="pointbox-points pointbox-item">
+        <p>{points}</p>
+      </td>
+    </tr>
+  );
+}
+
+function CheckBox(props) {
+  const checked = props.isChecked;
+  const [isHovered, setHovered] = useState(false);
+
+  const onMouseEnter = () => {
+    setHovered(true);
+  };
+
+  const onMouseLeave = () => {
+    setHovered(false);
+  };
+
+  const getBackgroundColor = () => {
+    if (checked) {
+      if (isHovered) {
+        return "rgba(0, 206, 65, 1)";
+      }
+      return "rgba(0, 206, 65, .75)";
+    } else {
+      if (isHovered) {
+        return "rgba(109, 234, 255, 1)";
+      }
+      return "rgba(109, 234, 255, .75)";
+    }
+  };
+
+  const test = false;
+
+  return (
+    <div
+      className="checkbox-filled"
+      onClick={props.handleClick}
+      style={
+        test
+          ? { backgroundColor: "rgba(109, 234, 255, .75)" }
+          : { backgroundColor: getBackgroundColor() }
+      }
+      onChange={props.onChange}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    ></div>
   );
 }
 
@@ -64,28 +104,35 @@ function ObjectivesDisplay() {
   };
 
   return (
-    <div>
-      <ul className="objectivesDisplay">
+    <div id="tableDiv">
+      <table className="objectivesDisplay">
+        <tr>
+          <th>Finished</th>
+          <th>Objective</th>
+          <th>Points</th>
+        </tr>
         {objectives.map((i, index) => {
           return (
-            <li>
-              <PointBox
-                text={i.text}
-                points={i.points}
-                isChecked={checkedState[index]}
-                onChange={() => handleOnChenge(index)}
-              />
-            </li>
+            <PointBox
+              text={i.text}
+              points={i.points}
+              isChecked={checkedState[index]}
+              handleClick={() => handleOnChenge(index)}
+            />
           );
         })}
-      </ul>
-      <PointTotal total={findTotal()} />
+        <tr>
+          <td />
+          <td id="totalPointsText">
+            <p>total points:</p>
+          </td>
+          <td>
+            <p id="pointsTotal">{findTotal()}</p>
+          </td>
+        </tr>
+      </table>
     </div>
   );
-}
-
-function PointTotal(props) {
-  return <p>The total points is: {props.total}</p>;
 }
 
 export default App;

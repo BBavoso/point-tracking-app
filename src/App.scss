@@ -3,23 +3,51 @@
   margin: 0;
 }
 
-.pointbox {
-  border: 1px dashed black;
-  margin-bottom: 25px;
-  padding: 10px;
-  display: flex;
-  justify-content: left;
-}
-
-.pointbox-item {
-  border: 1px solid black;
-  display: inline-block;
-  padding: 10px;
-  // position: absolute;
-}
-
 .objectivesDisplay {
+  border-collapse: collapse;
+  text-align: center;
+  font-size: xx-large;
+}
+
+td {
   padding: 10px;
+}
+
+th {
+  padding: 15px;
+}
+
+.pointbox-checkbox {
+  padding: 0;
+}
+
+.checkbox-filled {
+  min-height: 100px;
+  height: 100%;
+  min-width: 100%;
+  position: relative;
+  // background-color: aquamarine;
+}
+
+.checkbox-filled:hover {
+  background-color: blue;
+  cursor: pointer;
+}
+
+tr:first-child {
+  border-bottom: 1px solid black;
+}
+
+td:nth-child(2) {
+  text-align: left;
+}
+
+#pointsTotal {
+  text-align: center;
+}
+
+#totalPointsText {
+  text-align: right;
 }
 
 li {
