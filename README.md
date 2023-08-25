@@ -1,6 +1,6 @@
 # README
 
-the project displays objectives
+The goal of this project is to create a web application that allows you to create challenge goals that have a certain number of points and you can check off these objectives in order to tally the amount of points.
 
 # TODO
 
