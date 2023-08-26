@@ -20,7 +20,13 @@ function ObjectivesDisplay() {
       return [];
     }
     const base64 = params.get("objectives");
-    const startingObjectives = JSON.parse(atob(base64));
+    var startingObjectives = null;
+    try {
+      startingObjectives = JSON.parse(atob(base64));
+    } catch (error) {
+      return [];
+    }
+
     return startingObjectives["objectives"];
   };
 
