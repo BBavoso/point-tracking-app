@@ -4,7 +4,8 @@ The goal of this project is to create a web application that allows you to creat
 
 # TODO
 
-- [ ] allow saving through downloading a csv
-- [x] show an error message on bad url params parse
-- [ ] implement a share checked feature
-- [ ] update page manifest
+-   [ ] allow saving through downloading a csv
+-   [x] show an error message on bad url params parse
+-   [ ] implement a share checked feature
+-   [ ] update page manifest
+-   [ ] change styling
